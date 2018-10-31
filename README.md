@@ -1,6 +1,11 @@
 # BD-Handling-Vs
 Handling Vs in Big Data: Velocity, Volume, and Variety
 
+## Table of Contents
+ - [Velocity using Apache Kafka](https://github.com/bukalapak/BD-Handling-Vs/blob/master/README.md#velocity-using-apache-kafka)
+ - [Volume using Apache Spark](https://github.com/bukalapak/BD-Handling-Vs/blob/master/README.md#volume-using-apache-spark)
+ - [Variety](https://github.com/bukalapak/BD-Handling-Vs/blob/master/README.md#variety)
+
 ## Velocity using Apache Kafka
 ### Setup Docker Container for Kafka Server
 1. Use tested OS like Ubuntu 18.04 LTS.
