@@ -4,7 +4,7 @@ Handling Vs in Big Data: Velocity, Volume, and Variety
 ## Table of Contents
  - [Velocity using Apache Kafka](https://github.com/bukalapak/BD-Handling-Vs/blob/master/README.md#velocity-using-apache-kafka)
  - [Volume using Apache Spark](https://github.com/bukalapak/BD-Handling-Vs/blob/master/README.md#volume-using-apache-spark)
- - [Variety](https://github.com/bukalapak/BD-Handling-Vs/blob/master/README.md#variety)
+ - [Variety of Serializers](https://github.com/bukalapak/BD-Handling-Vs/blob/master/README.md#variety-of-serializers)
 
 ## Velocity using Apache Kafka
 ### Setup Docker Container for Kafka Server
@@ -216,4 +216,9 @@ Up 4 seconds   0.0.0.0:8900->8888/tcp   sad_golick
 - [Handling Volume using Apache Spark](https://github.com/bukalapak/BD-Handling-Vs/blob/master/volume/notebook/spark.ipynb)
 
 
-## Variety
+## Variety of Serializers
+### Setup Docker Container
+Please use the same Docker container from [Volume using Apache Spark](https://github.com/bukalapak/BD-Handling-Vs/blob/master/README.md#volume-using-apache-spark).
+
+### Notebooks
+- [Matrix Serializers: Protocol Buffer, Numpy, Pickle, and HDF5](https://github.com/bukalapak/BD-Handling-Vs/blob/master/variety/notebook/matrix-serializer.ipynb)
