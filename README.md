@@ -5,6 +5,7 @@ Handling Vs in Big Data: Velocity, Volume, and Variety
  - [Velocity using Apache Kafka](https://github.com/bukalapak/BD-Handling-Vs/blob/master/README.md#velocity-using-apache-kafka)
  - [Volume using Apache Spark](https://github.com/bukalapak/BD-Handling-Vs/blob/master/README.md#volume-using-apache-spark)
  - [Variety of Serializers](https://github.com/bukalapak/BD-Handling-Vs/blob/master/README.md#variety-of-serializers)
+ - [Variety of File Formats](https://github.com/bukalapak/BD-Handling-Vs/blob/master/README.md#variety-of-file-formats)
 
 ## Velocity using Apache Kafka
 ### Setup Docker Container for Kafka Server
@@ -222,3 +223,11 @@ Please use the same Docker container from [Volume using Apache Spark](https://gi
 
 ### Notebooks
 - [Matrix Serializers: Protocol Buffer, Numpy, Pickle, and HDF5](https://github.com/bukalapak/BD-Handling-Vs/blob/master/variety/notebook/matrix-serializer.ipynb)
+
+
+## Variety of File Formats
+### Setup Docker Container
+Please use the same Docker container from [Volume using Apache Spark](https://github.com/bukalapak/BD-Handling-Vs/blob/master/README.md#volume-using-apache-spark).
+
+### Notebooks
+- [File Formats: Text File, RDD, and JSONL](https://github.com/bukalapak/BD-Handling-Vs/blob/master/variety/notebook/file-format.ipynb)
