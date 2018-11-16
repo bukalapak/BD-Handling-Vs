@@ -230,4 +230,4 @@ Please use the same Docker container from [Volume using Apache Spark](https://gi
 Please use the same Docker container from [Volume using Apache Spark](https://github.com/bukalapak/BD-Handling-Vs/blob/master/README.md#volume-using-apache-spark).
 
 ### Notebooks
-- [File Formats: Text File, RDD, and JSONL](https://github.com/bukalapak/BD-Handling-Vs/blob/master/variety/notebook/file-format.ipynb)
+- [File Formats: Text File, RDD, JSONL, Parquet, and ORC](https://github.com/bukalapak/BD-Handling-Vs/blob/master/variety/notebook/file-format.ipynb)
