@@ -110,8 +110,6 @@ ubuntu                     18.04    ea4c82dcd15a   11 days ago      85.8MB
 ```
 2. Run the Docker container to bring up Jupyter notebook.
 ```
-$ sudo docker run --rm -p 8900:8888 -v [path to volume/notebook]:/home/jovyan/work big-data-3v/volume-cpu:1.0.0
-
 $ sudo docker run --rm \
   --network="host" \
   -v [path to velocity/notebook]:/home/jovyan/work \
