@@ -2,10 +2,10 @@
 Handling Vs in Big Data: Velocity, Volume, and Variety
 
 ## Table of Contents
- - [Velocity using Apache Kafka](https://github.com/bukalapak/BD-Handling-Vs/blob/master/README.md#velocity-using-apache-kafka)
- - [Volume using Apache Spark](https://github.com/bukalapak/BD-Handling-Vs/blob/master/README.md#volume-using-apache-spark)
- - [Variety of Serializers](https://github.com/bukalapak/BD-Handling-Vs/blob/master/README.md#variety-of-serializers)
- - [Variety of File Formats](https://github.com/bukalapak/BD-Handling-Vs/blob/master/README.md#variety-of-file-formats)
+ - [Velocity using Apache Kafka](https://github.com/bukalapak/BD-Handling-Vs#velocity-using-apache-kafka)
+ - [Volume using Apache Spark](https://github.com/bukalapak/BD-Handling-Vs#volume-using-apache-spark)
+ - [Variety of Serializers](https://github.com/bukalapak/BD-Handling-Vs#variety-of-serializers)
+ - [Variety of File Formats](https://github.com/bukalapak/BD-Handling-Vs#variety-of-file-formats)
 
 ## Velocity using Apache Kafka
 ### Setup Docker Container for Kafka Server
