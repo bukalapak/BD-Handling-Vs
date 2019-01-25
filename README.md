@@ -7,6 +7,9 @@ Handling Vs in Big Data: Velocity, Volume, and Variety
  - [Variety of Serializers](https://github.com/bukalapak/BD-Handling-Vs#variety-of-serializers)
  - [Variety of File Formats](https://github.com/bukalapak/BD-Handling-Vs#variety-of-file-formats)
 
+## Documents
+ - [Presentation Slides](./docs/BD-Handling-Vs.pdf)
+
 ## Velocity using Apache Kafka
 ### Setup Docker Container for Kafka Server
 1. Use tested OS like Ubuntu 18.04 LTS.
