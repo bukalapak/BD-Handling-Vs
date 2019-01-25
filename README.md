@@ -2,10 +2,10 @@
 Handling Vs in Big Data: Velocity, Volume, and Variety
 
 ## Table of Contents
- - [Velocity using Apache Kafka](https://github.com/bukalapak/BD-Handling-Vs/blob/master/README.md#velocity-using-apache-kafka)
- - [Volume using Apache Spark](https://github.com/bukalapak/BD-Handling-Vs/blob/master/README.md#volume-using-apache-spark)
- - [Variety of Serializers](https://github.com/bukalapak/BD-Handling-Vs/blob/master/README.md#variety-of-serializers)
- - [Variety of File Formats](https://github.com/bukalapak/BD-Handling-Vs/blob/master/README.md#variety-of-file-formats)
+ - [Velocity using Apache Kafka](https://github.com/bukalapak/BD-Handling-Vs#velocity-using-apache-kafka)
+ - [Volume using Apache Spark](https://github.com/bukalapak/BD-Handling-Vs#volume-using-apache-spark)
+ - [Variety of Serializers](https://github.com/bukalapak/BD-Handling-Vs#variety-of-serializers)
+ - [Variety of File Formats](https://github.com/bukalapak/BD-Handling-Vs#variety-of-file-formats)
 
 ## Velocity using Apache Kafka
 ### Setup Docker Container for Kafka Server
@@ -110,8 +110,6 @@ ubuntu                     18.04    ea4c82dcd15a   11 days ago      85.8MB
 ```
 2. Run the Docker container to bring up Jupyter notebook.
 ```
-$ sudo docker run --rm -p 8900:8888 -v [path to volume/notebook]:/home/jovyan/work big-data-3v/volume-cpu:1.0.0
-
 $ sudo docker run --rm \
   --network="host" \
   -v [path to velocity/notebook]:/home/jovyan/work \
@@ -230,4 +228,4 @@ Please use the same Docker container from [Volume using Apache Spark](https://gi
 Please use the same Docker container from [Volume using Apache Spark](https://github.com/bukalapak/BD-Handling-Vs/blob/master/README.md#volume-using-apache-spark).
 
 ### Notebooks
-- [File Formats: Text File, RDD, and JSONL](https://github.com/bukalapak/BD-Handling-Vs/blob/master/variety/notebook/file-format.ipynb)
+- [File Formats: Text File, RDD, JSONL, Parquet, and ORC](https://github.com/bukalapak/BD-Handling-Vs/blob/master/variety/notebook/file-format.ipynb)
