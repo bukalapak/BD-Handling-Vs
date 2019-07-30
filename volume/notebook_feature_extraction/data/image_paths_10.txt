@@ -1,0 +1,10 @@
+./data/images/jacket copy 0.png
+./data/images/jacket copy 1.png
+./data/images/jacket copy 2.png
+./data/images/jacket copy 3.png
+./data/images/jacket copy 4.png
+./data/images/jacket copy 5.png
+./data/images/jacket copy 6.png
+./data/images/jacket copy 7.png
+./data/images/jacket copy 8.png
+./data/images/jacket copy 9.png
