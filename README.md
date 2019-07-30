@@ -2,10 +2,10 @@
 Handling Vs in Big Data: Velocity, Volume, and Variety
 
 ## Table of Contents
- - [Velocity using Apache Kafka](https://github.com/bukalapak/BD-Handling-Vs#velocity-using-apache-kafka)
- - [Volume using Apache Spark](https://github.com/bukalapak/BD-Handling-Vs#volume-using-apache-spark)
- - [Variety of Serializers](https://github.com/bukalapak/BD-Handling-Vs#variety-of-serializers)
- - [Variety of File Formats](https://github.com/bukalapak/BD-Handling-Vs#variety-of-file-formats)
+ - [Velocity using Apache Kafka](#velocity-using-apache-kafka)
+ - [Volume using Apache Spark](#volume-using-apache-spark)
+ - [Variety of Serializers](#variety-of-serializers)
+ - [Variety of File Formats](#variety-of-file-formats)
 
 ## Documents
  - [Presentation Slides](./docs/BD-Handling-Vs.pdf)
@@ -146,7 +146,7 @@ Up 17 hours              optimistic_williams
 7. Run notebooks listed below.
 
 ### Notebooks
-- [Kafka: Produce and Consume](https://github.com/bukalapak/BD-Handling-Vs/blob/master/velocity/notebook/kafka.ipynb)
+- [Kafka: Produce and Consume](./velocity/notebook/kafka.ipynb)
 
 
 ## Volume using Apache Spark
@@ -215,20 +215,21 @@ Up 4 seconds   0.0.0.0:8900->8888/tcp   sad_golick
 7. Run notebooks listed below.
 
 ### Notebooks
-- [Handling Volume using Apache Spark](https://github.com/bukalapak/BD-Handling-Vs/blob/master/volume/notebook/spark.ipynb)
+- [Handling Volume using Apache Spark for Word Count](./volume/notebook/spark.ipynb)
+- [Handling Volume using Apache Spark for Image Classification](./volume/notebook_feature_extraction/spark.ipynb)
 
 
 ## Variety of Serializers
 ### Setup Docker Container
-Please use the same Docker container from [Volume using Apache Spark](https://github.com/bukalapak/BD-Handling-Vs/blob/master/README.md#volume-using-apache-spark).
+Please use the same Docker container from [Volume using Apache Spark](#volume-using-apache-spark).
 
 ### Notebooks
-- [Matrix Serializers: Protocol Buffer, Numpy, Pickle, and HDF5](https://github.com/bukalapak/BD-Handling-Vs/blob/master/variety/notebook/matrix-serializer.ipynb)
+- [Matrix Serializers: Protocol Buffer, Numpy, Pickle, and HDF5](./variety/notebook/matrix-serializer.ipynb)
 
 
 ## Variety of File Formats
 ### Setup Docker Container
-Please use the same Docker container from [Volume using Apache Spark](https://github.com/bukalapak/BD-Handling-Vs/blob/master/README.md#volume-using-apache-spark).
+Please use the same Docker container from [Volume using Apache Spark](#volume-using-apache-spark).
 
 ### Notebooks
-- [File Formats: Text File, RDD, JSONL, Parquet, and ORC](https://github.com/bukalapak/BD-Handling-Vs/blob/master/variety/notebook/file-format.ipynb)
+- [File Formats: Text File, RDD, JSONL, Parquet, and ORC](./variety/notebook/file-format.ipynb)
