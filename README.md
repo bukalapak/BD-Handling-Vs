@@ -216,7 +216,8 @@ Up 4 seconds   0.0.0.0:8900->8888/tcp   sad_golick
 
 ### Notebooks
 - [Handling Volume using Apache Spark for Word Count](./volume/notebook/spark.ipynb)
-- [Handling Volume using Apache Spark for Image Classification](./volume/notebook_feature_extraction/spark.ipynb)
+- [Handling Volume using Apache Spark for Image Classification](./volume/notebook_image_classification/spark.ipynb)
+- [Handling Volume using Apache Spark for Feature Extraction](./volume/notebook_feature_extraction/spark.ipynb)
 
 
 ## Variety of Serializers
