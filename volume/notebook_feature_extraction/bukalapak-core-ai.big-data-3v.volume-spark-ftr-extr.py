@@ -21,34 +21,52 @@
 from pyspark.sql import SparkSession
 
 
-APP_NAME = "bukalapak-core-ai.big-data-3v.volume-spark-img-clsf"
+APP_NAME = "bukalapak-core-ai.big-data-3v.volume-spark-ftr-extr"
 
 
-def make_inference(xs):
+def extract_features(xs):
     import base64, pickle
     import numpy as np
     import tensorflow as tf
     # Extract input lists
-    inference_lists = []
+    image_info_lists = []
     images_array = []
     for x in xs:
-        inference_lists.append([x.tid, x.iid])
+        image_info_lists.append([x.tid, x.iid])
         images_array.append(pickle.loads(base64.b64decode(x.i_ped.encode('UTF-8'))))
     images_np = np.array(images_array)
     # Load VGG16 model
     vgg = tf.keras.applications.vgg16.VGG16(weights='imagenet', include_top=True)
-    # Do inference
-    inference = vgg.predict(images_np)
-    # Add Medusa features to output lists
-    if len(inference_lists) != len(inference):
-        raise ValueError('Total of image information lists is not ' +
+    # Construct medusa model
+    vgg_input = vgg.input
+    vgg_fc1_output = vgg.get_layer('fc1').output
+    vgg_fc2_output = vgg.get_layer('fc2').output
+    vgg_predictions_output = vgg.get_layer('predictions').output
+    medusa = tf.keras.models.Model(inputs=vgg_input, 
+                                   outputs=[vgg_fc1_output, 
+                                            vgg_fc2_output, 
+                                            vgg_predictions_output])
+    # Extract features
+    features = medusa.predict(images_np)
+    # Add features to image table lists
+    if len(image_info_lists) != len(features[0]):
+        raise ValueError('The total of the image table lists is not ' +
                          'the same as the total of Medusa feature lists')
-    for i in range(len(inference_lists)):
-        inference_lists[i].append(
-            base64.b64encode(pickle.dumps(inference[i])).decode('UTF-8')
+    for i in range(len(image_info_lists)):
+        # append fc1
+        image_info_lists[i].append(
+            base64.b64encode(pickle.dumps(features[0][i])).decode('UTF-8')
+        )
+        # append fc2
+        image_info_lists[i].append(
+            base64.b64encode(pickle.dumps(features[1][i])).decode('UTF-8')
+        )
+        # append prediction
+        image_info_lists[i].append(
+            base64.b64encode(pickle.dumps(features[2][i])).decode('UTF-8')
         )
 
-    return iter(inference_lists)
+    return iter(image_info_lists)
 
 
 def main(spark):
@@ -65,16 +83,18 @@ def main(spark):
     image_ped_dict_df = spark.read.orc(image_ped_orc_pathfilename)
     image_ped_dict_rdd = image_ped_dict_df.rdd
     print("        Number of Partitions:", image_ped_dict_rdd.getNumPartitions())
-    # Perform inference
-    image_infr_list_rdd = image_ped_dict_rdd.mapPartitions(make_inference)
+    # Extract features
+    image_infr_list_rdd = image_ped_dict_rdd.mapPartitions(extract_features)
     # Write output file
     image_infr_dict_rdd = image_infr_list_rdd.map(lambda x: Row(tid=x[0],
                                                                 iid=x[1],
-                                                                pred=x[2]))
+                                                                fc1=x[2],
+                                                                fc2=x[3],
+                                                                pred=x[4]))
     image_infr_dict_df = spark.createDataFrame(image_infr_dict_rdd)
     image_infr_dict_df.write.save(image_infr_orc_pathfilename, format="orc")
 
-    
+
 if __name__ == "__main__":
     # Configure Spark
     spark = SparkSession \
