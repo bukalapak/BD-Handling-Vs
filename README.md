@@ -185,7 +185,7 @@ REPOSITORY               TAG      IMAGE ID       CREATED         SIZE
 big-data-3v/volume       2.0.0    bf5880ffcabb   4 minutes ago   6.27GB
 jupyter/scipy-notebook   latest   ecc6fb3f374b   2 months ago    3.51GB
 ```
-4. Run the Docker container to bring up Jupyter notebook. The ollowing is for Word Count notebook;
+4. Run the Docker container to bring up Jupyter notebook. The following is for Word Count notebook;
 ```
 $ sudo docker run --rm \
   -p 8900:8888 \
