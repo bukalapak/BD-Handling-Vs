@@ -17,26 +17,36 @@ Handling Vs in Big Data: Velocity, Volume, and Variety
 ```
 $ which docker
 /usr/bin/docker
- 
-$ docker version
-Client:
- Version:           18.06.1-ce
- API version:       1.38
- Go version:        go1.10.3
- Git commit:        e68fc7a
- Built:             Tue Aug 21 17:24:51 2018
+```
+```
+$ sudo docker version
+Client: Docker Engine - Community
+ Version:           19.03.3
+ API version:       1.40
+ Go version:        go1.12.10
+ Git commit:        a872fc2f86
+ Built:             Tue Oct  8 00:59:59 2019
  OS/Arch:           linux/amd64
  Experimental:      false
- 
-Server:
+
+Server: Docker Engine - Community
  Engine:
-  Version:          18.06.1-ce
-  API version:      1.38 (minimum version 1.12)
-  Go version:       go1.10.3
-  Git commit:       e68fc7a
-  Built:            Tue Aug 21 17:23:15 2018
+  Version:          19.03.3
+  API version:      1.40 (minimum version 1.12)
+  Go version:       go1.12.10
+  Git commit:       a872fc2f86
+  Built:            Tue Oct  8 00:58:31 2019
   OS/Arch:          linux/amd64
   Experimental:     false
+ containerd:
+  Version:          1.2.10
+  GitCommit:        b34a5c8af56e510852c35414db4c1f4fa6172339
+ runc:
+  Version:          1.0.0-rc8+dev
+  GitCommit:        3e425f80a8c931f88e6d94a8c831b9d5aa481657
+ docker-init:
+  Version:          0.18.0
+  GitCommit:        fec3683
 ```
 3. Build Docker images for ZooKeeper, Kafka and Schema Registry using following commands. Please refer to [Single Node Basic Deployment on Docker](https://docs.confluent.io/current/installation/docker/docs/installation/single-node-client.html) for more details.
 ```
@@ -89,58 +99,36 @@ $ sudo docker run -d \
 5. Check the running containers.
 ```
 $ sudo docker ps
-CONTAINER ID   IMAGE                                    COMMAND                  CREATED             
-dd28b79b46b4   confluentinc/cp-kafka:latest             "/etc/confluent/dock…"   5 seconds ago       
-8b84124c4d0d   confluentinc/cp-schema-registry:latest   "/etc/confluent/dock…"   21 minutes ago      
-b8e16aa25d18   confluentinc/cp-zookeeper:latest         "/etc/confluent/dock…"   21 minutes ago      
-
-STATUS          PORTS                                                    NAMES
-Up 3 seconds    0.0.0.0:9092->9092/tcp, 0.0.0.0:29092->29092/tcp         kafka
-Up 21 minutes   0.0.0.0:8081->8081/tcp                                   schema-registry
-Up 21 minutes   2181/tcp, 2888/tcp, 3888/tcp, 0.0.0.0:32181->32181/tcp   zookeeper
+CONTAINER ID   IMAGE                                    COMMAND                  CREATED          STATUS          PORTS                                                    NAMES
+0d6d6b763f51   confluentinc/cp-schema-registry:latest   "/etc/confluent/dock…"   13 seconds ago   Up 11 seconds   0.0.0.0:8081->8081/tcp                                   schema-registry
+b5fa5152323c   confluentinc/cp-kafka:latest             "/etc/confluent/dock…"   20 seconds ago   Up 18 seconds   0.0.0.0:9092->9092/tcp, 0.0.0.0:29092->29092/tcp         kafka
+a17e2a53ef87   confluentinc/cp-zookeeper:latest         "/etc/confluent/dock…"   29 seconds ago   Up 28 seconds   2181/tcp, 2888/tcp, 3888/tcp, 0.0.0.0:32181->32181/tcp   zookeeper
 ```
 
 ### Setup Docker Container for Kafka Client using Notebook
 1. Build Docker image that consists of Python and Kafka client. Go to `velocity/docker/client/` directory and run following command.
 ```
-$ sudo docker build . -t big-data-3v/velocity-cpu:1.0.0
-
+$ sudo docker build . -t big-data-3v/velocity:1.0.1
+```
+```
 $ sudo docker images
-REPOSITORY                 TAG      IMAGE ID       CREATED          SIZE
-big-data-3v/velocity-cpu   1.0.0    b7012140ed7b   13 minutes ago   927MB
-jupyter/base-notebook      latest   65eb0b6c51aa   3 days ago       814MB
-ubuntu                     18.04    ea4c82dcd15a   11 days ago      85.8MB
+REPOSITORY              TAG      IMAGE ID       CREATED         SIZE
+big-data-3v/velocity    1.0.1    b3154846a642   3 minutes ago   943MB
+jupyter/base-notebook   latest   65eb0b6c51aa   11 months ago   814MB
+ubuntu                  18.04    2ca708c1c9cc   4 weeks ago     64.2MB
 ```
 2. Run the Docker container to bring up Jupyter notebook.
-```
+```  
 $ sudo docker run --rm \
   --network="host" \
   -v [path to velocity/notebook]:/home/jovyan/work \
-  big-data-3v/velocity-cpu:1.0.0
-
-Container must be run with group "root" to update passwd file
-Executing the command: jupyter notebook
-[I 11:52:47.963 NotebookApp] Writing notebook server cookie secret to /home/jovyan/.local/share/jupyter/runtime/notebook_cookie_secret
-[I 11:52:48.142 NotebookApp] JupyterLab extension loaded from /opt/conda/lib/python3.6/site-packages/jupyterlab
-[I 11:52:48.142 NotebookApp] JupyterLab application directory is /opt/conda/share/jupyter/lab
-[I 11:52:48.145 NotebookApp] Serving notebooks from local directory: /home/jovyan
-[I 11:52:48.145 NotebookApp] The Jupyter Notebook is running at:
-[I 11:52:48.145 NotebookApp] http://(eka-ubuntu or 127.0.0.1):8888/?token=1c755cc64d033eaa9daa132f9218bde1a1d50246d70ebb17
-[I 11:52:48.145 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
-[C 11:52:48.146 NotebookApp] 
-    
-    Copy/paste this URL into your browser when you connect for the first time,
-    to login with a token:
-        http://(eka-ubuntu or 127.0.0.1):8888/?token=1c755...
+  big-data-3v/velocity:1.0.1
 ```
 5. Check the running container.
 ```
 $ sudo docker ps
-CONTAINER ID   IMAGE                            COMMAND                  CREATED
-4eda7a3d014c   big-data-3v/velocity-cpu:1.0.0   "tini -g -- start-no…"   17 hours ago
-
-STATUS        PORTS      NAMES
-Up 17 hours              optimistic_williams
+CONTAINER ID   IMAGE                        COMMAND                  CREATED         STATUS         PORTS   NAMES
+030b48650e82   big-data-3v/velocity:1.0.1   "tini -g -- start-no…"   5 minutes ago   Up 5 minutes           magical_booth
 ```
 6. Run Jupyter notebook using internet browser. Go to `127.0.0.1:8888` and key in token information.
 7. Run notebooks listed below.
@@ -156,60 +144,73 @@ Up 17 hours              optimistic_williams
 ```
 $ which docker
 /usr/bin/docker
- 
-$ docker version
-Client:
- Version:           18.06.1-ce
- API version:       1.38
- Go version:        go1.10.3
- Git commit:        e68fc7a
- Built:             Tue Aug 21 17:24:51 2018
+```
+```
+$ sudo docker version
+Client: Docker Engine - Community
+ Version:           19.03.3
+ API version:       1.40
+ Go version:        go1.12.10
+ Git commit:        a872fc2f86
+ Built:             Tue Oct  8 00:59:59 2019
  OS/Arch:           linux/amd64
  Experimental:      false
- 
-Server:
+
+Server: Docker Engine - Community
  Engine:
-  Version:          18.06.1-ce
-  API version:      1.38 (minimum version 1.12)
-  Go version:       go1.10.3
-  Git commit:       e68fc7a
-  Built:            Tue Aug 21 17:23:15 2018
+  Version:          19.03.3
+  API version:      1.40 (minimum version 1.12)
+  Go version:       go1.12.10
+  Git commit:       a872fc2f86
+  Built:            Tue Oct  8 00:58:31 2019
   OS/Arch:          linux/amd64
   Experimental:     false
+ containerd:
+  Version:          1.2.10
+  GitCommit:        b34a5c8af56e510852c35414db4c1f4fa6172339
+ runc:
+  Version:          1.0.0-rc8+dev
+  GitCommit:        3e425f80a8c931f88e6d94a8c831b9d5aa481657
+ docker-init:
+  Version:          0.18.0
+  GitCommit:        fec3683
 ```
 3. Build Docker image that consists of Python, Spark, PySpark, TensorFlow, SciPy, NumPy and Pandas. Go to `volume/docker/` directory and run following command.
 ```
-$ sudo docker build . -t big-data-3v/volume-cpu:1.0.0
-
-$ sudo docker images
-REPOSITORY               TAG      IMAGE ID       CREATED              SIZE
-big-data-3v/volume-cpu   1.0.0    ba3fa35b01dd   About a minute ago   5.9GB
-jupyter/scipy-notebook   latest   cc5eae6cb64f   3 weeks ago          4.7GB
+$ sudo docker build . -t big-data-3v/volume:2.0.0
 ```
-4. Run the Docker container to bring up Jupyter notebook.
+```
+$ sudo docker images
+REPOSITORY               TAG      IMAGE ID       CREATED         SIZE
+big-data-3v/volume       2.0.0    bf5880ffcabb   4 minutes ago   6.27GB
+jupyter/scipy-notebook   latest   ecc6fb3f374b   2 months ago    3.51GB
+```
+4. Run the Docker container to bring up Jupyter notebook. The ollowing is for Word Count notebook;
 ```
 $ sudo docker run --rm \
   -p 8900:8888 \
   -v [path to volume/notebook]:/home/jovyan/work \
-  big-data-3v/volume-cpu:1.0.0
-
-[I 14:46:11.264 NotebookApp] Writing notebook server cookie secret to /home/jovyan/.local/share/jupyter/runtime/notebook_cookie_secret
-[W 14:46:11.398 NotebookApp] WARNING: The notebook server is listening on all IP addresses and not using encryption. This is not recommended.
-[I 14:46:11.423 NotebookApp] JupyterLab extension loaded from /opt/conda/lib/python3.6/site-packages/jupyterlab
-[I 14:46:11.423 NotebookApp] JupyterLab application directory is /opt/conda/share/jupyter/lab
-[I 14:46:11.429 NotebookApp] Serving notebooks from local directory: /home/jovyan
-[I 14:46:11.429 NotebookApp] The Jupyter Notebook is running at:
-[I 14:46:11.429 NotebookApp] http://(c7831edbaee2 or 127.0.0.1):8888/?token=0b90...
-[I 14:46:11.429 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+  big-data-3v/volume:2.0.0
+```
+The following is for Image Classification notebook;
+```
+$ sudo docker run --rm \
+  -p 8900:8888 \
+  -v [path to volume/notebook]:/home/jovyan/work \
+  big-data-3v/volume:2.0.0
+```
+The following is for Feature Extraction notebook;
+```
+$ sudo docker run --rm \
+  -p 8900:8888 \
+  -v [path to volume/notebook_feature_extraction]:/home/jovyan/work \
+  big-data-3v/volume:2.0.0
 ```
 5. Check the running container.
 ```
 $ sudo docker ps
-CONTAINER ID   IMAGE                          COMMAND                  CREATED
-8c10fe346060   big-data-3v/volume-cpu:1.0.0   "tini -g -- start-no…"   5 seconds ago
-
-STATUS         PORTS                    NAMES
-Up 4 seconds   0.0.0.0:8900->8888/tcp   sad_golick
+CONTAINER ID   IMAGE                      COMMAND                  CREATED              STATUS              PORTS                    NAMES
+444e60c54221   big-data-3v/volume:2.0.0   "tini -g -- start-no…"   About a minute ago   Up About a minute   0.0.0.0:8900->8888/tcp   thirsty_wescoff
 ```
 6. Run Jupyter notebook using internet browser. Go to `127.0.0.1:8900` and key in token information.
 7. Run notebooks listed below.
