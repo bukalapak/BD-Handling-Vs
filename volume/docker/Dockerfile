@@ -7,8 +7,9 @@ LABEL maintainer="Jupyter Project <jupyter@googlegroups.com>"
 USER root
 
 # Spark dependencies
-ENV APACHE_SPARK_VERSION 2.3.3
+ENV APACHE_SPARK_VERSION 2.4.4
 ENV HADOOP_FOR_SPARK_VERSION 2.7
+ENV TENSORFLOW_VERSION 1.15.0
 
 RUN apt-get -y update && \
     apt-get install --no-install-recommends -y openjdk-8-jre-headless ca-certificates-java && \
@@ -17,7 +18,7 @@ RUN apt-get -y update && \
 
 RUN cd /tmp && \
         wget -q http://mirrors.ukfast.co.uk/sites/ftp.apache.org/spark/spark-${APACHE_SPARK_VERSION}/spark-${APACHE_SPARK_VERSION}-bin-hadoop${HADOOP_FOR_SPARK_VERSION}.tgz && \
-        echo "27CF9AD268E684D6926201BB5478F7F5A410659972BC79FC14AF61245EFF50C9A4363E400311B2FA9E1326E8AF1EB6DDE1D359B88B9143F25A49B3E11596B002 *spark-${APACHE_SPARK_VERSION}-bin-hadoop${HADOOP_FOR_SPARK_VERSION}.tgz" | sha512sum -c - && \
+        echo "2E3A5C853B9F28C7D4525C0ADCB0D971B73AD47D5CCE138C85335B9F53A6519540D3923CB0B5CEE41E386E49AE8A409A51AB7194BA11A254E037A848D0C4A9E5 *spark-${APACHE_SPARK_VERSION}-bin-hadoop${HADOOP_FOR_SPARK_VERSION}.tgz" | sha512sum -c - && \
         tar xzf spark-${APACHE_SPARK_VERSION}-bin-hadoop${HADOOP_FOR_SPARK_VERSION}.tgz -C /usr/local --owner root --group root --no-same-owner && \
         rm spark-${APACHE_SPARK_VERSION}-bin-hadoop${HADOOP_FOR_SPARK_VERSION}.tgz
 RUN cd /usr/local && ln -s spark-${APACHE_SPARK_VERSION}-bin-hadoop${HADOOP_FOR_SPARK_VERSION} spark
@@ -50,5 +51,5 @@ RUN conda install --quiet --yes \
     conda clean -tipsy && \
     fix-permissions $CONDA_DIR && \
     fix-permissions /home/$NB_USER
-RUN pip install tensorflow
+RUN pip install tensorflow==${TENSORFLOW_VERSION}
 
