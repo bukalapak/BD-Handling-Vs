@@ -106,29 +106,36 @@ a17e2a53ef87   confluentinc/cp-zookeeper:latest         "/etc/confluent/dock…"
 ```
 
 ### Setup Docker Container for Kafka Client using Notebook
-1. Build Docker image that consists of Python and Kafka client. Go to `velocity/docker/client/` directory and run following command.
+1. Get or build Docker image that consists of Python and Kafka client.
+
+Get pre-build image from Docker Hub.
 ```
-$ sudo docker build . -t big-data-3v/velocity:1.0.1
+$ docker pull bukalapak/big-data-3v-velocity:1.0.1
+```
+
+Or buit it by going to `velocity/docker/client/` directory and run following command.
+```
+$ sudo docker build . -t bukalapak/big-data-3v-velocity:1.0.1
 ```
 ```
 $ sudo docker images
-REPOSITORY              TAG      IMAGE ID       CREATED         SIZE
-big-data-3v/velocity    1.0.1    b3154846a642   3 minutes ago   943MB
-jupyter/base-notebook   latest   65eb0b6c51aa   11 months ago   814MB
-ubuntu                  18.04    2ca708c1c9cc   4 weeks ago     64.2MB
+REPOSITORY                       TAG      IMAGE ID       CREATED         SIZE
+bukalapak/big-data-3v-velocity   1.0.1    b3154846a642   4 weeks ago     943MB
+jupyter/base-notebook            latest   65eb0b6c51aa   11 months ago   814MB
+ubuntu                           18.04    2ca708c1c9cc   4 weeks ago     64.2MB
 ```
 2. Run the Docker container to bring up Jupyter notebook.
 ```  
 $ sudo docker run --rm \
   --network="host" \
   -v [path to velocity/notebook]:/home/jovyan/work \
-  big-data-3v/velocity:1.0.1
+  bukalapak/big-data-3v-velocity:1.0.1
 ```
 5. Check the running container.
 ```
 $ sudo docker ps
-CONTAINER ID   IMAGE                        COMMAND                  CREATED         STATUS         PORTS   NAMES
-030b48650e82   big-data-3v/velocity:1.0.1   "tini -g -- start-no…"   5 minutes ago   Up 5 minutes           magical_booth
+CONTAINER ID   IMAGE                                  COMMAND                  CREATED          STATUS          PORTS   NAMES
+58c320f11c72   bukalapak/big-data-3v-velocity:1.0.1   "tini -g -- start-no…"   19 seconds ago   Up 19 seconds           stupefied_bhaskara
 ```
 6. Run Jupyter notebook using internet browser. Go to `127.0.0.1:8888` and key in token information.
 7. Run notebooks listed below.
@@ -175,42 +182,49 @@ Server: Docker Engine - Community
   Version:          0.18.0
   GitCommit:        fec3683
 ```
-3. Build Docker image that consists of Python, Spark, PySpark, TensorFlow, SciPy, NumPy and Pandas. Go to `volume/docker/` directory and run following command.
+3. Get or build Docker image that consists of Python, Spark, PySpark, TensorFlow, SciPy, NumPy and Pandas.
+
+Get pre-build image from Docker Hub.
 ```
-$ sudo docker build . -t big-data-3v/volume:2.0.0
+$ docker pull bukalapak/big-data-3v-volume:2.0.0
+```
+
+Or make it by going to `volume/docker/` directory and run following command.
+```
+$ sudo docker build . -t bukalapak/big-data-3v-volume:2.0.0
 ```
 ```
 $ sudo docker images
-REPOSITORY               TAG      IMAGE ID       CREATED         SIZE
-big-data-3v/volume       2.0.0    bf5880ffcabb   4 minutes ago   6.27GB
-jupyter/scipy-notebook   latest   ecc6fb3f374b   2 months ago    3.51GB
+REPOSITORY                    TAG      IMAGE ID       CREATED         SIZE
+bukalapak/big-data-3v-volume  2.0.0    bf5880ffcabb   4 weeks ago    6.27GB
+jupyter/scipy-notebook        latest   ecc6fb3f374b   2 months ago   3.51GB
 ```
 4. Run the Docker container to bring up Jupyter notebook. The following is for Word Count notebook;
 ```
 $ sudo docker run --rm \
   -p 8900:8888 \
   -v [path to volume/notebook]:/home/jovyan/work \
-  big-data-3v/volume:2.0.0
+  bukalapak/big-data-3v-volume:2.0.0
 ```
 The following is for Image Classification notebook;
 ```
 $ sudo docker run --rm \
   -p 8900:8888 \
   -v [path to volume/notebook]:/home/jovyan/work \
-  big-data-3v/volume:2.0.0
+  bukalapak/big-data-3v-volume:2.0.0
 ```
 The following is for Feature Extraction notebook;
 ```
 $ sudo docker run --rm \
   -p 8900:8888 \
   -v [path to volume/notebook_feature_extraction]:/home/jovyan/work \
-  big-data-3v/volume:2.0.0
+  bukalapak/big-data-3v-volume:2.0.0
 ```
 5. Check the running container.
 ```
 $ sudo docker ps
-CONTAINER ID   IMAGE                      COMMAND                  CREATED              STATUS              PORTS                    NAMES
-444e60c54221   big-data-3v/volume:2.0.0   "tini -g -- start-no…"   About a minute ago   Up About a minute   0.0.0.0:8900->8888/tcp   thirsty_wescoff
+CONTAINER ID   IMAGE                                COMMAND                  CREATED              STATUS              PORTS                    NAMES
+444e60c54221   bukalapak/big-data-3v-volume:2.0.0   "tini -g -- start-no…"   About a minute ago   Up About a minute   0.0.0.0:8900->8888/tcp   thirsty_wescoff
 ```
 6. Run Jupyter notebook using internet browser. Go to `127.0.0.1:8900` and key in token information.
 7. Run notebooks listed below.
