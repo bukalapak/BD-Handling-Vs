@@ -108,7 +108,7 @@ a17e2a53ef87   confluentinc/cp-zookeeper:latest         "/etc/confluent/dock…"
 ### Setup Docker Container for Kafka Client using Notebook
 1. Get or build Docker image that consists of Python and Kafka client.
 
-Get pre-build image from Docker Hub.
+Get pre-built image from Docker Hub.
 ```
 $ docker pull bukalapak/big-data-3v-velocity:1.0.1
 ```
@@ -184,7 +184,7 @@ Server: Docker Engine - Community
 ```
 3. Get or build Docker image that consists of Python, Spark, PySpark, TensorFlow, SciPy, NumPy and Pandas.
 
-Get pre-build image from Docker Hub.
+Get pre-built image from Docker Hub.
 ```
 $ docker pull bukalapak/big-data-3v-volume:2.0.0
 ```
